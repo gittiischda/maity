@@ -678,14 +678,14 @@ def test_a_project_with_a_found_release_tag_is_released_by_0097(engine: Engine) 
     assert released[ids["none"]] is None
 
 
-def test_a_human_with_the_meat_proxy_switch_on_gets_both_parts_by_0101(engine: Engine) -> None:
-    """0101 (§5.2): `meat_proxy` true becomes both parts true, false both false; downgrading
+def test_a_human_with_the_meat_proxy_switch_on_gets_both_parts_by_0103(engine: Engine) -> None:
+    """0103 (§5.2): `meat_proxy` true becomes both parts true, false both false; downgrading
     makes the switch the or of the parts."""
     from sqlalchemy import text
 
     from tests import factory
 
-    migrate(engine, _before(engine, "0101"))
+    migrate(engine, _before(engine, "0103"))
     on, off = factory.human(engine, "on"), factory.human(engine, "off")
     with engine.begin() as conn:
         conn.execute(text("UPDATE human SET meat_proxy = :v WHERE id = :id"), {"v": True, "id": on})
@@ -703,7 +703,7 @@ def test_a_human_with_the_meat_proxy_switch_on_gets_both_parts_by_0101(engine: E
         conn.execute(
             text("UPDATE human SET meat_proxy_hands = :v WHERE id = :id"), {"v": False, "id": on}
         )
-    downgrade(engine, _before(engine, "0101"))
+    downgrade(engine, _before(engine, "0103"))
     with engine.connect() as conn:
         rows = conn.execute(text("SELECT id, meat_proxy FROM human")).all()
     switch = {r[0]: bool(r[1]) for r in rows}

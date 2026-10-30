@@ -125,7 +125,7 @@ that part off and leaves the other as it is, and `meat_proxy: false` with a part
 `conflicts_with_parts`. The note is the intro and the sentence of each part that is on, joined by one
 space, the lead part first. `GET /me` carries both parts and the note always (while the mode is off the
 note is the one with both parts, what switching it on would send); the resume packet carries parts and
-note only while the mode is on, and `meat_proxy: false` alone otherwise. Migration 0101 sets both parts
+note only while the mode is on, and `meat_proxy: false` alone otherwise. Migration 0103 sets both parts
 from the old column and drops it; the downgrade sets the old column from either part.
 
 **Reason:** one stored state per fact: the parts are what the person said, and a stored switch beside
